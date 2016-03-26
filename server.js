@@ -2,7 +2,10 @@
 
 var fs = require('fs');
 var express = require('express');
+var cors = require('cors');
+
 var app = express();
+app.use(cors());
 
 app.get('/caf', function caf(req, res) {
   var data = JSON.parse(fs.readFileSync('./caf.json'));

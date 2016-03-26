@@ -12,12 +12,12 @@ class App extends React.Component {
     };
   }
   componentWillMount() {
-    fetch('http://ec2-52-207-245-202.compute-1.amazonaws.com/caf.json')
+    fetch('http://ec2-52-207-245-202.compute-1.amazonaws.com:3000/caf.json')
       .then(res => res.json())
       .then(formatData)
       .then(data => this.setState({caf: data}))
       .catch(e => { console.log(e); });
-    fetch('http://ec2-52-207-245-202.compute-1.amazonaws.com/sadler.json')
+    fetch('http://ec2-52-207-245-202.compute-1.amazonaws.com:3000/sadler.json')
       .then(res => res.json())
       .then(formatData)
       .then(data => this.setState({sadler: data}))
