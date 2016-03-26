@@ -1,5 +1,8 @@
-body, html { font-family: avenir; }
-@media (min-width: 700px) {
+body, html {
+  font-family: avenir;
+  font-size: 110%;
+}
+@media (min-width: 600px) {
   .container {
     width: 600px;
     margin: 0 auto;
@@ -7,11 +10,11 @@ body, html { font-family: avenir; }
 }
 .center { text-align: center; }
 .mt3 { margin-top: 30px; }
+.mb3 { margin-bottom: 30px; }
 .mb1 { margin-bottom: 10px }
-.mv3 {
-  margin-bottom: 30px;
-  margin-top: 30px;
-}
+.bold { font-weight: bold; }
 .white { color: #fff; }
 .bg-black { background-color: #000; }
-.bold { font-weight: bold; }
+.ptr:hover { cursor: crosshair; }
+.med { font-size: 1.5em; }
+.hidden { display: none; }

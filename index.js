@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       caf: {},
       sadler: {},
-      selected: 'sadler'
+      selected: 'caf',
+      collapsed: []
     };
   }
   componentWillMount() {
@@ -26,26 +26,32 @@ class App extends React.Component {
   select(hall) {
     this.setState({ selected: hall });
   }
-  render() {
-    var { caf, sadler, selected } = this.state;
-    return <div>
-      {selected === 'caf' && <DiningHall name='Caf' data={caf}/>}
-      {selected === 'sadler' && <DiningHall name='Sadler' data={sadler}/>}
-    </div>;
+  collapse(mealName) {
+    var { collapsed } = this.state;
+    if (collapsed.indexOf(mealName) > -1) {
+      collapsed = collapsed.filter(m => m !== mealName);
+    } else {
+      collapsed.push(mealName);
+    }
+      this.setState({ collapsed });
   }
-}
-
-class DiningHall extends React.Component {
   render() {
-    var { data } = this.props;
+    var { selected, collapsed } = this.state;
+    var data = selected === 'caf' ? this.state.caf : this.state.sadler;
     return <div className='center'>
-      <h2 className='center'>{this.props.name}</h2>
-      <div className='mv3'>
+      <div className='center med mt3'>
+        <span className={`ptr ${selected === 'caf' ? 'white bg-black' : ''}`} onClick={this.select.bind(this, 'caf')}>
+          Caf
+        </span> / <span className={`ptr ${selected === 'sadler' ? 'white bg-black' : ''}`} onClick={this.select.bind(this, 'sadler')}>
+          Sadler
+        </span>
+      </div>
+      <div className='mb3 mt3'>
         {Object.keys(data).map(mealName => <div key={mealName}>
-          <h4 className='white bg-black'>{mealName}</h4>
-          <div>
+          <div className='white bg-black mt3 ptr' onClick={this.collapse.bind(this, mealName)}>{mealName}</div>
+          <div className={`${collapsed.indexOf(mealName) === -1 ? 'hidden' : ''}`}>
             {Object.keys(data[mealName]).map(station => <div key={station}>
-              <div className='bold mt3 mb1'>{station}</div>
+              <div className='mt3 mb1 bold'>{station}</div>
               <div>{data[mealName][station].map((meal, i) => <div key={meal + i}>{meal}</div>)}</div>
             </div>)}
           </div>
