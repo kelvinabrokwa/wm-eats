@@ -1,0 +1,27 @@
+{
+  "name": "wm-eats",
+  "version": "0.0.1",
+  "description": "wmeats.xyz ---",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo ./index.js --serve=bundle.js --live --open -- -t [ babelify --presets [ es2015 react ] ] | garnish",
+    "start-server": "./server.js",
+    "build": "browserify --transform [ babelify --presets [ es2015 react ] ] --debug -p [ minifyify --map bundle.map.json --output bundle.map.json ] index.js -o bundle.js",
+    "scrape": "./get_data.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelvinabrokwa/wm-eats.git"
+  },
+  "author": "Kelvin Abrokwa-Johnson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kelvinabrokwa/wm-eats/issues"
+  },
+  "homepage": "https://github.com/kelvinabrokwa/wm-eats#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "jsdom": "^8.1.0",
+    "promise": "^7.1.1"
+  }
+}

@@ -1,2 +1,3 @@
-*.json
 .eslintrc
+caf.json
+sadler.json
