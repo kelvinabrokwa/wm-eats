@@ -1,0 +1,17 @@
+body, html { font-family: avenir; }
+@media (min-width: 700px) {
+  .container {
+    width: 600px;
+    margin: 0 auto;
+  }
+}
+.center { text-align: center; }
+.mt3 { margin-top: 30px; }
+.mb1 { margin-bottom: 10px }
+.mv3 {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+.white { color: #fff; }
+.bg-black { background-color: #000; }
+.bold { font-weight: bold; }
