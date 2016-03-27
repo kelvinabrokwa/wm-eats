@@ -49,7 +49,7 @@ class App extends React.Component {
       <div className='mb3 mt3'>
         {Object.keys(data).map(mealName => <div key={mealName}>
           <div className='white bg-black mt3 ptr' onClick={this.collapse.bind(this, mealName)}>{mealName}</div>
-          <div className={`${collapsed.indexOf(mealName) === -1 ? 'hidden' : ''}`}>
+          <div className={`${collapsed.indexOf(mealName) === -1 ? 'hidden' : 'block'}`}>
             {Object.keys(data[mealName]).map(station => <div key={station}>
               <div className='mt3 mb1 bold'>{station}</div>
               <div>{data[mealName][station].map((meal, i) => <div key={meal + i}>{meal}</div>)}</div>
