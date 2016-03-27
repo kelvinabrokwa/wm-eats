@@ -39,5 +39,5 @@ module.exports = function(url) {
 };
 
 function getToday() {
-  return ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'][(new Date()).getDay()];
+  return ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][(new Date()).getDay()];
 }
