@@ -18,7 +18,7 @@ class App extends React.Component {
       .then(res => res.json())
       .then(formatData)
       .then(data => {
-        if (data.length)
+        if (Object.keys(data).length)
           this.setState({caf: data});
         else
           this.setState({cafUnavailable: true});
@@ -28,7 +28,7 @@ class App extends React.Component {
       .then(res => res.json())
       .then(formatData)
       .then(data => {
-        if (data.length)
+        if (Object.keys(data).length)
           this.setState({sadler: data});
         else
           this.setState({sadlerUnavailable: true});
