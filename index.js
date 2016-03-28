@@ -8,19 +8,31 @@ class App extends React.Component {
       caf: {},
       sadler: {},
       selected: 'caf',
-      collapsed: []
+      collapsed: [],
+      sadlerUnavailable: false,
+      cafUnavailable: false
     };
   }
   componentWillMount() {
     fetch('http://ec2-52-207-245-202.compute-1.amazonaws.com:3000/caf')
       .then(res => res.json())
       .then(formatData)
-      .then(data => this.setState({caf: data}))
+      .then(data => {
+        if (data.length)
+          this.setState({caf: data});
+        else
+          this.setState({cafUnavailable: true});
+      })
       .catch(e => { console.log(e); });
     fetch('http://ec2-52-207-245-202.compute-1.amazonaws.com:3000/sadler')
       .then(res => res.json())
       .then(formatData)
-      .then(data => this.setState({sadler: data}))
+      .then(data => {
+        if (data.length)
+          this.setState({sadler: data});
+        else
+          this.setState({sadlerUnavailable: true});
+      })
       .catch(e => { console.log(e); });
   }
   select(hall) {
@@ -38,6 +50,7 @@ class App extends React.Component {
   render() {
     var { selected, collapsed } = this.state;
     var data = selected === 'caf' ? this.state.caf : this.state.sadler;
+    var unavailable = this.state[selected + 'Unavailable'];
     return <div className='center'>
       <div className='center med mt3'>
         <span className={`ptr ${selected === 'caf' ? 'white bg-black' : ''}`} onClick={this.select.bind(this, 'caf')}>
@@ -46,7 +59,10 @@ class App extends React.Component {
           Sadler
         </span>
       </div>
-      <div className='mb3 mt3'>
+
+      {unavailable && <div className='mb3 mt3'>{selected} menu unavailable today...thanks sodexo :(</div>}
+
+      {(!unavailable) && <div className='mb3 mt3'>
         {Object.keys(data).map(mealName => <div key={mealName}>
           <div className='white bg-black mt3 ptr' onClick={this.collapse.bind(this, mealName)}>{mealName}</div>
           <div className={`${collapsed.indexOf(mealName) === -1 ? 'hidden' : 'block'}`}>
@@ -56,7 +72,7 @@ class App extends React.Component {
             </div>)}
           </div>
         </div>)}
-      </div>
+      </div>}
     </div>;
   }
 }
