@@ -15,11 +15,11 @@ var app = express();
 app.use(cors()); // enable CORS
 app.use(morgan('combined')); // logging
 
-let caf = null;
-let sadler = null;
+var caf = null;
+var sadler = null;
 
-let lastCafFetch = new Date();
-let lastSadlerFetch = new Date();
+var lastCafFetch = new Date();
+var lastSadlerFetch = new Date();
 
 app.get('/caf', (req, res) => {
   if (!caf || !currentData(lastCafFetch)) {
