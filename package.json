@@ -9,6 +9,9 @@
     "build": "browserify --transform [ babelify --presets [ es2015 react ] ] --debug -p [ minifyify --map bundle.map.json --output bundle.map.json ] index.js -o bundle.js",
     "scrape": "./get_data.js"
   },
+  "engine": {
+    "node": ">=6.2.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kelvinabrokwa/wm-eats.git"
