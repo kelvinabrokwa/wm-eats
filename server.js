@@ -12,6 +12,7 @@ var app = express();
 /**
  * Middleware
  */
+app.use(express.static('.')); // serve files
 app.use(cors()); // enable CORS
 app.use(morgan('combined')); // logging
 

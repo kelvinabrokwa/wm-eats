@@ -14,7 +14,7 @@ class App extends React.Component {
     };
   }
   componentWillMount() {
-    fetch('http://ec2-52-207-245-202.compute-1.amazonaws.com:3000/caf')
+    fetch('https://wm-eats.herokuapp.com/caf')
       .then(res => res.json())
       .then(formatData)
       .then(data => {
@@ -24,7 +24,7 @@ class App extends React.Component {
           this.setState({cafUnavailable: true});
       })
       .catch(e => { console.log(e); });
-    fetch('http://ec2-52-207-245-202.compute-1.amazonaws.com:3000/sadler')
+    fetch('https://wm-eats.herokuapp.com/sadler')
       .then(res => res.json())
       .then(formatData)
       .then(data => {
