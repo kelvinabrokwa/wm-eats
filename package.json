@@ -10,7 +10,7 @@
     "scrape": "./get_data.js"
   },
   "engine": {
-    "node": ">=6.2.1"
+    "node": "6.2.1"
   },
   "repository": {
     "type": "git",
