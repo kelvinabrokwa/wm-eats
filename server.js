@@ -1,20 +1,65 @@
 #!/usr/bin/env node
 
-var fs = require('fs');
-var express = require('express');
-var cors = require('cors');
+const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
+const getData = require('./get_data');
+
+const PORT = process.env.PORT || 3000;
 
 var app = express();
-app.use(cors());
 
-app.get('/caf', function caf(req, res) {
-  var data = JSON.parse(fs.readFileSync('./caf.json'));
-  res.send(data);
+/**
+ * Middleware
+ */
+app.use(cors()); // enable CORS
+app.use(morgan('combined')); // logging
+
+let caf = null;
+let sadler = null;
+
+let lastCafFetch = new Date();
+let lastSadlerFetch = new Date();
+
+app.get('/caf', (req, res) => {
+  if (!caf || !currentData(lastCafFetch)) {
+    getData('caf')
+      .then(data => {
+        lastCafFetch = new Date();
+        caf = data;
+        res.send(caf);
+      })
+      .catch(err => console.log(err));
+  }
+  else {
+    res.send(caf);
+  }
 });
-app.get('/sadler', function sadler(req, res) {
-  var data = JSON.parse(fs.readFileSync('./sadler.json'));
-  res.send(data);
+
+app.get('/sadler', (req, res) => {
+  if (!sadler) {
+    getData('sadler')
+      .then(data => {
+        lastSadlerFetch = new Date();
+        sadler = data;
+        res.send(sadler);
+      })
+      .catch(err => console.log(err));
+  }
+  else {
+    res.send(sadler);
+  }
 });
-app.listen(3000, function() {
-  console.log('WM Eats server listening on port:', 3000);
+
+function currentData(last) {
+  today = new Date();
+  return today.getDate() === last.getDate() &&
+         today.getMonth() === last.getMonth() &&
+         today.getFullYear() === last.getFullYear();
+};
+
+app.listen(PORT, function() {
+  console.log('---------------------------------------');
+  console.log('WM Eats server listening on port:', PORT);
+  console.log('---------------------------------------');
 });
