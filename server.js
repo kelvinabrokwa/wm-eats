@@ -38,7 +38,7 @@ app.get('/caf', (req, res) => {
 });
 
 app.get('/sadler', (req, res) => {
-  if (!sadler) {
+  if (!sadler || !currentData(lastSadlerFetch)) {
     getData('sadler')
       .then(data => {
         lastSadlerFetch = new Date();
